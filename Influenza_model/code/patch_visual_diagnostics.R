@@ -1,12 +1,3 @@
-if(!('ggplot2' %in% installed.packages()[, "Package"])) {
-  install.packages('ggplot2')
-}
-if(!('ggpubr' %in% installed.packages()[, "Package"])) {
-  install.packages('ggpubr')
-}
-library(ggplot2)
-library(ggpubr)
-
 
 # Pulling data for plotting
 run_subset <- c(9,23,38)# x_sample

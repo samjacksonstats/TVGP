@@ -1,19 +1,4 @@
-#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-#Install original 2D OPE package locally
-if(!('OPE' %in% installed.packages()[, "Package"])) {
-  install.packages(paste(getwd(),"/OPE_0.7.tar.gz", sep=''), repos = NULL, type="source")
-}
-if(!('rTensor' %in% installed.packages()[, "Package"])) {
-  install.packages('rTensor')
-}
-
-library(OPE)
-library(rTensor)
-
-source("code/ML_OPE.R")#Maximum Likelihood for OPE
-source("code/OPE 3D extension.R")#Source 3D OPE extension
-load("code/patch model data.RData")
-
+# OPE for influenza simulator
 
 #Select regression function for OPE
 gr <- function(x) {
@@ -103,7 +88,7 @@ myOPE <- adjustOPE3(myOPE, R = R, Y = Y[,1:n_patches,t_design], rhovecR = rhovec
 mu <- stdev <- array(NA,dim = c(150,n_patches,length(t_design)))
 df <- NULL
 for(ind in 3*(1:50)){
-  cat(paste("Curernt input prediction",ind,'out of 150 \n'))
+  cat(paste("Current input prediction",ind,'out of 150 \n'))
   x_sample <- (ind-2):ind
   pp2 <- predictOPE3(myOPE, Rp = xDiagnostic_scaled[x_sample,],  type='Student-t')
   mu[(ind-2):ind,,] <- pp2$mu
