@@ -93,7 +93,7 @@ for(size in c("20","50")){
   x <- as.vector(lfxD[,,1:time_d])[thin_sample]
   sdev <-  sqrt(as.vector(OPE_pred$stdev[,,1:time_d])[thin_sample])
   plot(1, type="n", xlab=expression(log(f(bold(x))+1)),ylab=expression(mu(bold(x))), xlim=c(0,5), ylim=c(-1,6),cex.axis = 1.3,cex.lab=1.3)
-  arrows(x, y-3*sdev, x, y+3*sdev, length=0.1, angle=90, code=3, col=4)
+   arrows(x, y-3*sdev, x, y+3*sdev, length=0.1, angle=90, code=3, col=4)
   points(x,y, pch=19, col=2)
   points(x=c(0,17),y=c(0,17), type='l', lwd=2)
   title(paste('Environmental model : OPE n=', size, sep=''))#, adj = .95, line = -16, cex.main =2)
@@ -103,7 +103,12 @@ for(size in c("20","50")){
   stdev_PPE <- as.vector(PPE_prediction$stdev[,,1:time_d])[thin_sample]
   y <- as.vector(PPE_prediction$mu[,,1:time_d])[thin_sample]
   plot(1, type="n", xlab=expression(log(f(bold(x))+1)),ylab=expression(mu(bold(x))), xlim=c(0,5), ylim=c(-1,6),cex.axis = 1.3,cex.lab=1.3)
-  arrows(x, y-3*stdev_PPE, x, y+3*stdev_PPE, length=0.1, angle=90, code=3, col=4)
+  apply(cbind(x, y, stdev_PPE), 1, \(z) {
+        if(6 * z[3] > 0.01) {
+         arrows(z[1], z[2]-3*z[3], z[1], z[2] + 3*z[3], length=0.1, angle=90, code=3, col=4)
+        }
+   }
+  )
   points(x,y, pch=19, col=2)
   points(x=c(0,17),y=c(0,17), type='l', lwd=2)
   title(paste('Environmental model : PPE n=', size, sep=''))#, adj = .95, line = -16, cex.main=2)
@@ -150,15 +155,14 @@ fig <- plot_ly(OPE_data,
         z = ~z,
         type = "scatter3d",
         mode = "markers",
-        size=1, showscale=FALSE ) %>% add_surface(x = s_full, y = t_full, z = t(output) ,opacity = 0.8, showlegend = FALSE) %>% layout(
+        size=1) %>% add_surface(x = s_full, y = t_full, z = t(output) ,opacity = 0.8, showlegend = FALSE) %>% layout(
                                                                                                             scene = list(
                                                                                                             xaxis=axx,
                                                                                                             yaxis=axy,
                                                                                                             zaxis=list(title = "OPE mean"),
                                                                                                             camera = camera
-                                                                                                            )
-                                                                                                            )
-print(fig)
+                                                                                                            )                                                                                                            )
+suppressWarnings(print(fig))
 
 # Surface + mean prediction scatter
 # PPE
@@ -168,26 +172,26 @@ fig <- plot_ly(PPE_data,
         z = ~z,
         type = "scatter3d",
         mode = "markers",
-        size=1, showscale = FALSE) %>% add_surface(x = s_full, y = t_full, z = t(output) ,opacity = 0.8, showlegend = FALSE) %>% layout(scene = list(xaxis=axx,yaxis=axy,zaxis=list(
+        size=1) %>% add_surface(x = s_full, y = t_full, z = t(output) ,opacity = 0.8, showlegend = FALSE) %>% layout(scene = list(xaxis=axx,yaxis=axy,zaxis=list(
                                                                                                             title = "PPE mean"),camera = camera))
-print(fig)
+suppressWarnings(print(fig))
 
 # Surface plots
 # Response f(x)
-fig <- plot_ly(x = s_full, y = t_full, z = z, showscale=FALSE ) %>% add_surface() %>% layout(scene = list(xaxis=axx,yaxis=axy,zaxis=axz,
+fig <- plot_ly(x = s_full, y = t_full, z = z) %>% add_surface() %>% layout(scene = list(xaxis=axx,yaxis=axy,zaxis=axz,
   camera = camera))
 print(fig)
 
 # OPE mean
 OPE_mean=t(mu_OPE[select_point,,])
-fig <- plot_ly(x = s, y = t, z = OPE_mean, showscale=FALSE ) %>% add_surface() %>% layout(scene = list(xaxis=axx,yaxis=axy,zaxis=list(
+fig <- plot_ly(x = s, y = t, z = OPE_mean) %>% add_surface() %>% layout(scene = list(xaxis=axx,yaxis=axy,zaxis=list(
   title = "OPE mean"),
   camera = camera))
 print(fig)
 
 # PPE mean
 PPE_mean=t(mu_PPE[select_point,,])
-fig <- plot_ly(x = s, y = t, z = PPE_mean, showscale=FALSE ) %>% add_surface() %>% layout(scene = list(xaxis=axx,yaxis=axy,zaxis=list(
+fig <- plot_ly(x = s, y = t, z = PPE_mean) %>% add_surface() %>% layout(scene = list(xaxis=axx,yaxis=axy,zaxis=list(
   title = "PPE mean"),
   camera = camera))
 print(fig)

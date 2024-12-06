@@ -91,7 +91,14 @@ for(training_size in c("20","50")){
   y <- as.vector(direct_flu_prediction$mu[,,1:time_d])[thin_sample]
   sdev <-  as.vector(direct_flu_prediction$stdev[,,1:time_d])[thin_sample]
   plot(1, type="n", xlab=expression(log(f(bold(x))+1)),ylab=expression(mu(bold(x))), xlim=c(0,13), ylim=c(-4,15),cex.axis = 1.3,cex.lab=1.3)
-  arrows(x, y-3*sdev, x, y+3*sdev, length=0.1, angle=90, code=3, col=4)
+  
+  apply(cbind(x, y, sdev), 1, \(z) {
+   if(6 * z[3] > 0.01) {
+    arrows(z[1], z[2]-3*z[3], z[1], z[2] + 3*z[3], length=0.1, angle=90, code=3, col=4)
+   }
+  }
+  )
+  
   points(x,y, pch=19, col=2)
   points(x=c(0,17),y=c(0,17), type='l', lwd=2)
   title(paste('Influenza PPE : ', training_size, sep=''))#, adj = .95, line = -16, cex.main=2)
