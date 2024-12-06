@@ -1,7 +1,7 @@
 # TvGP code
 
 
-This repository contains code to support the paper “ensor-variate
+This repository contains code to support the paper “Tensor-variate
 Gaussian process regression for efficient emulation of complex systems:
 comparing regressor and covariance structures in outer product and
 parallel partial emulators” by Semochkina[^1], Jackson[^2] and

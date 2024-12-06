@@ -3,7 +3,7 @@ title: "TvGP code"
 format: gfm
 ---
 
-This repository contains code to support the paper "ensor-variate Gaussian process regression for efficient emulation of complex systems: comparing regressor and covariance structures in outer product and parallel partial emulators" by Semochkina[^soton], Jackson[^durham] and Woods[^soton].
+This repository contains code to support the paper "Tensor-variate Gaussian process regression for efficient emulation of complex systems: comparing regressor and covariance structures in outer product and parallel partial emulators" by Semochkina[^soton], Jackson[^durham] and Woods[^soton].
 
 The code is structured as follows:
 
