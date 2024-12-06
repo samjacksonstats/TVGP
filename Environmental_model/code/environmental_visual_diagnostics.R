@@ -1,14 +1,4 @@
-if(!('ggplot2' %in% installed.packages()[, "Package"])) {
-  install.packages('ggplot2')
-}
-if(!('ggpubr' %in% installed.packages()[, "Package"])) {
-  install.packages('ggpubr')
-}
-library(ggplot2)
-library(ggpubr)
 
-
-source("code/environmental model function.R")
 # Create DataFrame for Plotting
 
 # # Select the same point as in the paper
@@ -125,7 +115,7 @@ par(mfcol = c(1, 1))
 if(!('plotly' %in% installed.packages()[, "Package"])) {
   install.packages('plotly')
 }
-library(plotly)
+
 # Specify axis titles and camera angle for 3D plot
 axx <- list(
   title = "space"

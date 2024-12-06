@@ -1,7 +1,5 @@
 ### Run Environmental Model ###
 
-source("code/environmental model function.R") # Environmental function
-
 #Generate outut for generated designs x20, x50 and x150
 fx20 <- array(unlist(apply(x20, 1, environ)), dim=c(s_n,t_n,20))
 fx20 <- aperm(fx20, c(3,1,2))

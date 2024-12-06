@@ -1,17 +1,3 @@
-#setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
-#Install original 2D OPE package locally
-if(!('OPE' %in% installed.packages()[, "Package"])) {
-  install.packages(paste(getwd(),"/OPE_0.7.tar.gz", sep=''), repos = NULL, type="source")
-}
-if(!('rTensor' %in% installed.packages()[, "Package"])) {
-  install.packages('rTensor')
-}
-
-library(OPE)
-library(rTensor)
-
-source("code/ML_OPE.R")#Maximum Likelihood for OPE
-source("code/OPE 3D extension.R")#Source 3D OPE extension
 
 #Select regression function for OPE
 gr <- function(x) {

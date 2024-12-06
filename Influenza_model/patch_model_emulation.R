@@ -37,4 +37,5 @@ source(here("influenza_model", "code", "PPE_patch.R"))
 source(here("influenza_model", "code", "patch_numerical_diagnostics.R"))
 
 ## Visual Diagnostics ##
+## This script will produce, for one randomly selected diagnostic point, a number of plots that could be viewed on the 'Plots' tab in RStudio 
 source(here("influenza_model", "code", "patch_visual_diagnostics.R"))
