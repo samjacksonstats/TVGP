@@ -20,12 +20,12 @@ library("NetworkPPBLE")
 library("OPE")
 
 ## Source functions
-source(here("influenza_model", "code", "ML_OPE.R")) # Maximum Likelihood for OPE
-source(here("influenza_model", "code", "OPE_3D_extension.R")) # Source 3D OPE extension
-source(here("influenza_model", "code", "PPE_functions.R")) # PPE
+source(here("code", "ML_OPE.R")) # Maximum Likelihood for OPE
+source(here("code", "OPE_3D_extension.R")) # Source 3D OPE extension
+source(here("code", "PPE_functions.R")) # PPE
 
 ## Load model runs used in the article. 
-load(here("influenza_model", "code", "patch_model_data.rdata" ))
+load(here("influenza_model", "data", "patch_model_data.rdata" ))
 
 ## Outer Product Emulation (OPE) ##
 source(here("influenza_model", "code", "OPE_patch.R"))

@@ -24,13 +24,13 @@ library("OPE")
 
 ## Source functions
 source(here("Environmental_model", "code", "environmental_model_function.R")) # Environmental function
-source(here("Environmental_model", "code", "ML_OPE.R")) #Maximum Likelihood for OPE
-source(here("Environmental_model", "code", "OPE_3D_extension.R")) #Source 3D OPE extension
-source(here("Environmental_model", "code", "PPE_Functions.R"))
+source(here("code", "ML_OPE.R")) #Maximum Likelihood for OPE
+source(here("code", "OPE_3D_extension.R")) #Source 3D OPE extension
+source(here("code", "PPE_Functions.R"))
 
 ## Generate designs of size 20, 50 and 150, or load in designs from paper. 
 # source(here("Environmental_model", "code", "max_pro_design.R"))
-load(here("Environmental_model", "code", "article_env_design.rdata"))
+load(here("Environmental_model", "data", "article_env_design.rdata"))
 
 ## Run the environmental model at designs x20, x50 and x150. ##
 source(here("Environmental_model", "code", "run_environmental_model.R"))
