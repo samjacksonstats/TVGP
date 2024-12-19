@@ -5,7 +5,7 @@ This repository contains code to support the paper “Tensor-variate
 Gaussian process regression for efficient emulation of complex systems:
 comparing regressor and covariance structures in outer product and
 parallel partial emulators” by Semochkina[^1], Jackson[^2] and
-Woods[^3].
+Woods[^1].
 
 The code is structured as follows:
 
@@ -22,5 +22,3 @@ The code is structured as follows:
 [^1]: University of Southampton, Southampton, UK
 
 [^2]: Durham University, Durham, UK
-
-[^3]: University of Southampton, Southampton, UK
