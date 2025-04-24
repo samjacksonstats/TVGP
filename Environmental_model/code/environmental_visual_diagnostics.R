@@ -50,7 +50,7 @@ for(j in 1:15){
   # ggplot2 LineGraph with Shading Confidence Interval
   g <- ggplot(DF3,aes(X, Mean)) +
     geom_line(aes(group=Group, col=Group, linewidth=Group)) +
-    scale_linewidth_manual(values=c(.5,.5,2))+
+    scale_linewidth_manual(values=c(.5,.5,.5))+
     geom_ribbon(aes(ymin=min, ymax=max, fill=Group),  alpha=.3)+
     scale_fill_manual(values=rep(c("#F8766D", "#00BA38", "#ffffff00"),200))+
     ggtitle(paste('Space coordinate',round(s[j],2)))+
