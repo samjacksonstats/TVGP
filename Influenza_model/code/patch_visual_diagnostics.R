@@ -38,7 +38,7 @@ for(j in patch_subset){
     
     g <- ggplot(DF3,aes(X, Mean)) +
       geom_line(aes(group=Group, col=Group, linewidth=Group)) +
-      scale_linewidth_manual(values=c(1,1,2))+
+      scale_linewidth_manual(values=c(1,1,1))+
       geom_ribbon(aes(ymin=min, ymax=max, fill=Group),  alpha=0.3)+
       # guides(linetype = guide_legend(override.aes = list(size = c(.5,.5,2))))+
       scale_fill_manual(values=rep(c("#F8766D", "#00BA38", "#ffffff00"),150))+
