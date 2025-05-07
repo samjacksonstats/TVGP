@@ -54,7 +54,7 @@ for(j in 1:15){
     scale_linewidth_manual(values=c(1,1,1))+
     scale_colour_manual(values=rep(c("#619cffff", "#00BA38", "#F8766D"),200))+
     ggtitle(paste('Space coordinate',round(s[j],2)))+
-      xlab("time")+ylab("")
+      xlab("time")+ylab("")+theme(legend.title=element_blank())
 
   plots[[k]] <- g
   k <- k+1
