@@ -24,11 +24,11 @@ k <- 1
 for(j in 1:15){
   for(i in select_point){
     DF3 <- NULL
-    DF3 <-  rbind(DF3, data.frame(X = t,
-                                  Mean = mu_OPE[i,j,],
-                                  min = mu_OPE[i,j,]+stdev_OPE[i,j,] * qt(0.975, df = df_OPE[i,j,]),
-                                  max = mu_OPE[i,j,]-stdev_OPE[i,j,] * qt(0.975, df = df_OPE[i,j,]),
-                                  Group=as.factor('OPE')#paste('OPE:',j, 'input:', run_subset[i])
+    DF3 <- rbind(DF3, data.frame(X = t,
+                                 Mean = lfxD[i,j,],
+                                 min = lfxD[i,j,],
+                                 max = lfxD[i,j,],
+                                 Group=as.factor('Output')#paste('Output:',j,'input:', run_subset[i])
     ))
     DF3 <- rbind(DF3, data.frame(X = t,
                                  Mean = mu_PPE[i,j,],
@@ -38,21 +38,21 @@ for(j in 1:15){
                                    stdev_PPE[i,j,]*qnorm(0.975),
                                  Group=as.factor('PPE')#paste('PPE:',j,'input:', run_subset[i])
     ))
-    DF3 <- rbind(DF3, data.frame(X = t,
-                                 Mean = lfxD[i,j,],
-                                 min = lfxD[i,j,],
-                                 max = lfxD[i,j,],
-                                 Group=as.factor('Output')#paste('Output:',j,'input:', run_subset[i])
+    DF3 <-  rbind(DF3, data.frame(X = t,
+                                  Mean = mu_OPE[i,j,],
+                                  min = mu_OPE[i,j,]+stdev_OPE[i,j,] * qt(0.975, df = df_OPE[i,j,]),
+                                  max = mu_OPE[i,j,]-stdev_OPE[i,j,] * qt(0.975, df = df_OPE[i,j,]),
+                                  Group=as.factor('OPE')#paste('OPE:',j, 'input:', run_subset[i])
     ))
-
 
 
   # ggplot2 LineGraph with Shading Confidence Interval
   g <- ggplot(DF3,aes(X, Mean)) +
+    geom_ribbon(aes(ymin=min, ymax=max, fill=Group),  alpha=.3)+
+    scale_fill_manual(values=rep(c("#ffffff00", "#00BA38", "#F8766D"),200))+
     geom_line(aes(group=Group, col=Group, linewidth=Group)) +
     scale_linewidth_manual(values=c(1,1,1))+
-    geom_ribbon(aes(ymin=min, ymax=max, fill=Group),  alpha=.3)+
-    scale_fill_manual(values=rep(c("#F8766D", "#00BA38", "#ffffff00"),200))+
+    scale_colour_manual(values=rep(c("#619cffff", "#00BA38", "#F8766D"),200))+
     ggtitle(paste('Space coordinate',round(s[j],2)))+
       xlab("time")+ylab("")
 
