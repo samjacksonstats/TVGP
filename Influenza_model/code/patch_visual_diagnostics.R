@@ -15,11 +15,11 @@ k <- 1
 for(j in patch_subset){
   for(i in run_subset){
     DF3 <- NULL
-    DF3 <-  rbind(DF3, data.frame(X = t_design,
-                                  Mean = mu[i,j,t_design],
-                                  min = mu[i,j,t_design]-stdev[i,j,t_design] * qt(0.975, df = df[i]),
-                                  max = mu[i,j,t_design]+stdev[i,j,t_design] * qt(0.975, df = df[i]),
-                                  Group=as.factor('OPE')#paste('OPE:',j, 'input:', i)
+    DF3 <- rbind(DF3, data.frame(X = t_design,
+                                 Mean = fxD[i,j,t_design],
+                                 min = fxD[i,j,t_design],
+                                 max = fxD[i,j,t_design],
+                                 Group=as.factor('Output')#paste('Output:',j,'input:', i)
     ))
     DF3 <- rbind(DF3, data.frame(X = t_design,
                                  Mean = direct_flu_prediction$mu[i,j,t_design],
@@ -29,19 +29,20 @@ for(j in patch_subset){
                                   direct_flu_prediction$stdev[i,j,t_design]*qnorm(0.975),
                                  Group=as.factor('PPE')#paste('PPE:',j,'input:', i)
     ))
-    DF3 <- rbind(DF3, data.frame(X = t_design,
-                                 Mean = fxD[i,j,t_design],
-                                 min = fxD[i,j,t_design],
-                                 max = fxD[i,j,t_design],
-                                 Group=as.factor('Output')#paste('Output:',j,'input:', i)
+    DF3 <-  rbind(DF3, data.frame(X = t_design,
+                                  Mean = mu[i,j,t_design],
+                                  min = mu[i,j,t_design]-stdev[i,j,t_design] * qt(0.975, df = df[i]),
+                                  max = mu[i,j,t_design]+stdev[i,j,t_design] * qt(0.975, df = df[i]),
+                                  Group=as.factor('OPE')#paste('OPE:',j, 'input:', i)
     ))
     
     g <- ggplot(DF3,aes(X, Mean)) +
-      geom_line(aes(group=Group, col=Group, linewidth=Group)) +
-      scale_linewidth_manual(values=c(1,1,1))+
       geom_ribbon(aes(ymin=min, ymax=max, fill=Group),  alpha=0.3)+
       # guides(linetype = guide_legend(override.aes = list(size = c(.5,.5,2))))+
-      scale_fill_manual(values=rep(c("#F8766D", "#00BA38", "#ffffff00"),150))+
+      scale_fill_manual(values=rep(c("#ffffff00", "#00BA38", "#F8766D"),150))+
+      geom_line(aes(group=Group, col=Group, size=Group)) +
+      scale_size_manual(values=c(1,1,1))+ 
+      scale_colour_manual(values=rep(c("#619cffff", "#00BA38", "#F8766D"),150))+
       ggtitle(paste('Input: ',i,' Patch: ',j, sep=''))+
       # ggtitle(paste('Input: ',i,'Patch: ',patchNames[j]))+
       # guides(linetype = guide_legend(override.aes = list(linewidth = c(.5,.5,2))),
