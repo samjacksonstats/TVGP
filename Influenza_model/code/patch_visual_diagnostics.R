@@ -58,7 +58,7 @@ plot <- ggpubr::ggarrange(plots[[1]],plots[[2]],plots[[3]],
                   plots[[7]],plots[[8]],plots[[9]],
                   plots[[10]],plots[[11]],plots[[12]],
                   ncol=3, nrow=4, common.legend = TRUE, legend="bottom")
-print(annotate_figure(plot,top = text_grob(paste("Trainig size: ",training_size,sep=""),  size = 15)))
+print(annotate_figure(plot,top = text_grob(paste("Training size: ",training_size,sep=""),  size = 15)))
 }
 
 time_d <- 150
