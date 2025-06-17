@@ -62,7 +62,7 @@ for(j in 1:15){
 }
 
 plot <- ggarrange(plots[[1]], plots[[2]], ncol=1, nrow=2, common.legend = TRUE, legend="bottom")
-print(annotate_figure(plot,top = text_grob(paste("Trainig size: ",size,sep=""),  size = 15)))
+print(annotate_figure(plot,top = text_grob(paste("Training size: ",size,sep=""),  size = 15)))
 
 
 
